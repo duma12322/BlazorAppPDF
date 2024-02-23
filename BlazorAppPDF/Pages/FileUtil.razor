@@ -1,0 +1,19 @@
+﻿@using Microsoft.JSInterop;
+@using System.Threading.Tasks;
+@using System;
+@using Syncfusion.Pdf
+@using Syncfusion.Pdf.Grid;
+@using Syncfusion.Drawing;
+@using Syncfusion.Pdf.Graphics;
+@inject Microsoft.JSInterop.IJSRuntime JS
+@using System.IO;
+
+
+public static class FileUtil
+{
+    public static ValueTask<object> SaveAs(this IJSRuntime js, string filename, byte[] data)
+       => js.InvokeAsync<object>(
+           "saveAsFile",
+           filename,
+           Convert.ToBase64String(data));
+}
